@@ -16,6 +16,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.okhttp.client)
     implementation(libs.okhttp.client.interceptor)
+
     testImplementation(libs.junit)
     testImplementation(libs.mock.server)
     testImplementation(libs.coroutine.test)
