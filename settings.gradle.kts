@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "MyHeroes"
 include(":app")
 include(":platform:network")
+include(":platform:testhelper")

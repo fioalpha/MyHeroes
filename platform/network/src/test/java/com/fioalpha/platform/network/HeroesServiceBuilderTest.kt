@@ -1,6 +1,7 @@
 package com.fioalpha.platform.network
 
 import com.fioalpha.platform.network.di.HeroesFactory
+import com.fioalpha.testhelper.loadFile
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.runTest
 import okhttp3.mockwebserver.MockResponse
@@ -33,9 +34,3 @@ class HeroesServiceBuilderTest {
     }
 
 }
-
-fun Any.loadFile(path: String) = this.javaClass
-        .classLoader
-        .getResourceAsStream(path)
-        .bufferedReader()
-        .use { it.readText() }

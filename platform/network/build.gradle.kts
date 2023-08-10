@@ -10,6 +10,7 @@ java {
 }
 
 dependencies {
+    implementation(project(":platform:testhelper"))
     implementation(libs.gson)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.retrofit)
