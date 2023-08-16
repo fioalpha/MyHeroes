@@ -11,4 +11,6 @@ java {
 
 dependencies {
     implementation(libs.gson)
+    implementation(libs.coroutine.test)
+    implementation(libs.junit)
 }

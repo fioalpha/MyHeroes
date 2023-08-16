@@ -1,4 +1,4 @@
-package character
+package com.fioalpha.character.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -46,16 +46,5 @@ class CharacterViewModel(
             }
         }
     }
-
-}
-sealed interface CharacterInteraction {
-    data class LoadingData(val offset: Int): CharacterInteraction
-}
-
-sealed interface CharacterViewState {
-    data class Error(val message: String): CharacterViewState
-    object Init: CharacterViewState
-    object Loading: CharacterViewState
-    data class Data(val data: Any): CharacterViewState
 
 }
