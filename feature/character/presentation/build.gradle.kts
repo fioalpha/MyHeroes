@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":feature:character:data"))
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.material)
     implementation(libs.compose.foundation)
