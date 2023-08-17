@@ -2,6 +2,8 @@ package com.fioalpha.ui.theme
 
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.dp
 
@@ -12,3 +14,14 @@ class HeroesShapes(
 )
 
 internal val LocalShapes = staticCompositionLocalOf { HeroesShapes() }
+
+
+class HeroesTheme {
+
+    @Composable
+    fun theme(content: @Composable () -> Unit) {
+        MaterialTheme {
+            content()
+        }
+    }
+}

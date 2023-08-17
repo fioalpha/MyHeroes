@@ -6,10 +6,10 @@ plugins {
 
 android {
     namespace = "com.fioalpha.character.presentation"
-    compileSdk = 33
+    compileSdk = libs.versions.android.compile.get().toInt()
 
     defaultConfig {
-        minSdk = 24
+        minSdk = libs.versions.android.min.sdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -32,7 +32,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.2"
+        kotlinCompilerExtensionVersion = libs.versions.compose.compile.get()
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
