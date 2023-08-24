@@ -52,7 +52,6 @@ dependencies {
     implementation(libs.compose.activity)
     implementation(libs.compose.lifecycle.viewmodel)
     implementation(libs.bundles.androidx.bundle)
-
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -64,6 +63,7 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.compose.ui.test.junit)
+    androidTestImplementation(libs.compose.ui.test.manisfest)
 
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
