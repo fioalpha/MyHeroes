@@ -7,6 +7,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.time.Duration
+import java.util.concurrent.TimeUnit
 
 object HeroesServiceBuilder {
     fun build(
@@ -26,10 +27,10 @@ object HeroesServiceBuilder {
         return OkHttpClient.Builder()
             .addInterceptor(interceptor)
             .addInterceptor(AuthenticationUrl())
-            .callTimeout(Duration.ofSeconds(20))
-            .connectTimeout(Duration.ofSeconds(20))
-            .readTimeout(Duration.ofSeconds(20))
-            .writeTimeout(Duration.ofSeconds(20))
+//            .callTimeout(20, TimeUnit.MICROSECONDS)
+//            .connectTimeout(20, TimeUnit.MICROSECONDS)
+//            .readTimeout(20, TimeUnit.MICROSECONDS)
+//            .writeTimeout(20, TimeUnit.MICROSECONDS)
             .retryOnConnectionFailure(false)
             .build()
     }

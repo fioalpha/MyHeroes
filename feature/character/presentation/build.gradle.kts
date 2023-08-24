@@ -41,6 +41,7 @@ android {
 
 dependencies {
     implementation(project(":feature:character:data"))
+    implementation(project(":ui:components"))
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.material)
     implementation(libs.compose.foundation)
@@ -56,6 +57,8 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit.junit)
+
+    implementation(libs.koin.android)
 
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

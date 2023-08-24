@@ -1,15 +1,21 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
+//plugins {
+//    alias(libs.plugins.com.android.library)
+//    alias(libs.plugins.org.jetbrains.kotlin.android)
+//}
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
 
+
 android {
-    namespace = "com.fioalpha.ui.theme"
-    compileSdk = libs.versions.android.compile.get().toInt()
+    namespace = "com.fioalpha.ui.components"
+    compileSdk = 33
 
     defaultConfig {
-        minSdk = libs.versions.android.min.sdk.get().toInt()
+        minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -25,23 +31,24 @@ android {
         }
     }
     compileOptions {
-        compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_17
-            targetCompatibility = JavaVersion.VERSION_17
-        }
-        buildFeatures {
-            compose = true
-        }
-        composeOptions {
-            kotlinCompilerExtensionVersion = libs.versions.compose.compile.get()
-        }
-        kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_17.toString()
-        }
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.compile.get()
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 }
 
 dependencies {
+    implementation(project(":ui:desginertoken"))
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -56,7 +63,7 @@ dependencies {
     implementation(libs.compose.activity)
     implementation(libs.compose.lifecycle.viewmodel)
     implementation(libs.bundles.androidx.bundle)
-
+    implementation(libs.compose.coil)
 
     testImplementation(libs.junit.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

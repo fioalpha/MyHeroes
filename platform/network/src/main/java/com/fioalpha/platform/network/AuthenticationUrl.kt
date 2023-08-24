@@ -10,8 +10,8 @@ import java.util.Date
 
 internal class AuthenticationUrl(
     private val time: Long = Date().time,
-    private val privateKey: String = "",
-    private val publicKey: String = "",
+    private val privateKey: String = "45f27290cbe76b21e99247f8414e8204bb950230",
+    private val publicKey: String = "025f2cd3ea0aaa7b9c445d8a5897de59",
 ): Interceptor {
 
     private var hashAuthentication: String? = null

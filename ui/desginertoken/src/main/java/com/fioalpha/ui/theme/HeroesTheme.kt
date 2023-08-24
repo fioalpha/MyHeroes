@@ -15,13 +15,7 @@ class HeroesShapes(
 
 internal val LocalShapes = staticCompositionLocalOf { HeroesShapes() }
 
-
-class HeroesTheme {
-
-    @Composable
-    fun theme(content: @Composable () -> Unit) {
-        MaterialTheme {
-            content()
-        }
-    }
+@Composable
+fun HeroesTheme(content: @Composable () -> Unit) {
+    MaterialTheme { content() }
 }

@@ -3,9 +3,10 @@ package com.fioalpha.feature.character.data
 import com.fioalpha.feature.character.data.model.Character
 import com.fioalpha.feature.character.data.model.CharactersWrapper
 import com.fioalpha.platform.network.HeroesService
+import com.fioalpha.platform.network.HeroesServiceBuilder
 
 class CharacterRepositoryImpl(
-    private val service: HeroesService,
+    private val service: HeroesService ,
 ): CharacterRepository {
     override suspend fun fetchCharacters(offset: Int, limit: Int): CharactersWrapper {
        val result = service.charactersHeroes(limit, offset)
@@ -16,7 +17,8 @@ class CharacterRepositoryImpl(
                     Character(
                         id = it.id ?: 0,
                         name = it.name,
-                        description = it.description.orEmpty()
+                        description = it.description.orEmpty(),
+                        path = it.thumbnail.getFullPath()
                     )
                 } ?: emptyList()
             )
@@ -24,4 +26,10 @@ class CharacterRepositoryImpl(
         throw RuntimeException("Has error, status code: ${result.code}")
     }
 
+}
+
+object CharacterRepositoryFactory {
+    fun create(): CharacterRepository {
+        return CharacterRepositoryImpl(HeroesServiceBuilder.build("http://gateway.marvel.com/v1/public/"))
+    }
 }

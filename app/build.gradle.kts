@@ -38,7 +38,12 @@ dependencies {
     implementation(libs.android.material)
     implementation(libs.androidx.constraint.layout)
 
+    implementation(libs.koin.android)
+    implementation(libs.koin.core)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.test.ext.junit)
     androidTestImplementation(libs.expresso.core)
+
+    implementation(project(":feature:character:presentation"))
 }
