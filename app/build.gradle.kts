@@ -3,6 +3,9 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
+apply("${project.rootDir}/tools/jacoco-project.gradle")
+apply("${project.rootDir}/tools/jacoco.modules.gradle")
+
 android {
     namespace = "com.fioalpha.myheroes"
     compileSdk = 33
@@ -18,6 +21,9 @@ android {
     }
 
     buildTypes {
+        debug {
+
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")

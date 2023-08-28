@@ -21,8 +21,6 @@ class CharacterRepositoryTest {
 
     private val service: HeroesService = mockk()
     private lateinit var repository: CharacterRepository
-    private val gson: Gson = Gson()
-
     @Before
     fun setup() {
         repository = CharacterRepositoryImpl(service)

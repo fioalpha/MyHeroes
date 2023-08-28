@@ -4,6 +4,9 @@ plugins {
     alias(libs.plugins.org.jetbrains.kotlin.android)
 }
 
+apply("${project.rootDir}/tools/jacoco-project.gradle")
+apply("${project.rootDir}/tools/jacoco.modules.gradle")
+
 android {
     namespace = "com.fioalpha.character.presentation"
     compileSdk = libs.versions.android.compile.get().toInt()

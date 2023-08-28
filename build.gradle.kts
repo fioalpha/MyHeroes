@@ -4,3 +4,4 @@ plugins {
     alias(libs.plugins.org.jetbrains.kotlin.jvm) apply false
     alias(libs.plugins.com.android.library) apply false
 }
+apply("${project.rootDir}/tools/jacoco-project.gradle")

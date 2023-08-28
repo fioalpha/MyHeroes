@@ -14,6 +14,7 @@ androidx-arch-utils-test = "androidx.arch.core:core-testing:2.2.0"
 
 # Test
 junit = "junit:junit:4.13.2"
+org-jacoco-core = { module = "org.jacoco:org.jacoco.core", version.ref = "org-jacoco-core" }
 test-ext-junit = "androidx.test.ext:junit:1.1.5"
 expresso-core = "androidx.test.espresso:espresso-core:3.5.1"
 mock-server = "com.squareup.okhttp3:mockwebserver:4.11.0"
@@ -58,6 +59,7 @@ koin-android = { group = "io.insert-koin", name = "koin-android", version.ref= "
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
 
 [versions]
+org-jacoco-core = "0.8.6"
 org-jetbrains-kotlin-jvm = "1.8.10"
 agp = "8.1.0"
 org-jetbrains-kotlin-android = "1.8.10"

@@ -22,7 +22,10 @@ jobs:
         uses: android-actions/setup-android@v2
         
       - name: Unit test
-        run: ./gradlew testDebugUnitTest
+        run: ./gradlew coverAllVariants
+
+      - name: Merge report
+        run: ./gradlew allDebugCoverage
         
       - name: Build debug
         run: ./gradlew --no-daemon build

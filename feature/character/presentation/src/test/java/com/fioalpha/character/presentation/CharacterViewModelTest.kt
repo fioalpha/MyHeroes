@@ -35,7 +35,7 @@ class CharacterViewModelTest {
         delay(10)
         Truth.assertThat(viewModel.bind().value)
             .isEqualTo(CharacterViewState.Data(
-                CharactersWrapper(characters = emptyList(), 0)
+                emptyList()
             ))
     }
 

@@ -20,7 +20,6 @@ class CharacterViewModel(
     private val states: MutableStateFlow<CharacterViewState> = MutableStateFlow(CharacterViewState.Init)
 
     init {
-        Log.e("ViewModel", this@CharacterViewModel.hashCode().toString())
         viewModelScope.launch {
             interactions.consumeAsFlow().collect(::handleState)
         }
