@@ -36,6 +36,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -132,6 +134,9 @@ fun ItemsCharactersPreview() {
 @Composable
 fun Loading() {
     Box(modifier = Modifier.fillMaxWidth()
+        .semantics {
+            contentDescription = "Loading"
+        }
         .fillMaxHeight()
         .background(Color.White),
         contentAlignment = Alignment.Center
