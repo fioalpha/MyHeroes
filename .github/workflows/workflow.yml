@@ -30,43 +30,19 @@ jobs:
       - name: Build debug
         run: ./gradlew --no-daemon assembleDebug assembleDebugAndroidTest
 
-      - name: Running Interface Test
-        with:
-          arg-spec: '.github/workflows/firebaseTestLab.yaml'
 
-#      - name: 'Authenticate to Google Cloud'
-#        uses: 'google-github-actions/auth@v1'
-#        with:
-#          credentials_json: '${{ secrets.FIREBASE_AUTH }}'
-#
-#      - name: Test
-#        run: |
-#          gcloud firebase test android run --type instrumentation --use-orchestrator --no-performance-metrics --no-record-video --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk  --results-bucket cloud-test-heroes-ef5c5 --project=heroes-ef5c5
-#      - name: Test
-#        run: |
-#          pwd && ls
-#          cd app/build/outputs/apk/debug
-#          ls -R
-##
-#      - name: Run Android tests on Firebase Test Lab
-#        uses: asadmansr/Firebase-Test-Lab-Action@v1.0
-#        with:
-#          arg-spec: 'android-device.yml:android-pixel-4'
-#        env:
-#          SERVICE_ACCOUNT: ${{ secrets.FIREBASE_AUTH }}
-##
-#      - name: Download Android test APK
-#        uses: actions/download-artifact@v1
-#        with:
-#          name: app-debug-androidTest
-#
-#      - name: Login to Google Cloud
-#        uses: GoogleCloudPlatform/github-actions/setup-gcloud
-#        with:
-#          version: '270.0.0'
-#          service_account_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
-#
-#      - name: Set current project
-#        run: gcloud config set project ${{ secrets.GCLOUD_PROJECT_ID }}
+      - name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.FIREBASE_AUTH }}'
+
+      - name: Run Instrumentation Tests in Firebase Test Lab
+        run: gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test app-debug-androidTest/app-debug-androidTest.apk --device model=Pixel2,version=28,locale=pl,orientation=portrait
+
+      - name: Run Instrumentation Tests in Firebase Test Lab Presentation Characters Module
+        run: gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test  feature/character/presentation/build/outputs/apk/androidTest/debug/presentation-debug-androidTest --device model=Pixel2,version=28,locale=pl,orientation=portrait
+
+      - name: Run Instrumentation Tests in Firebase Test Lab Ui Module
+        run: gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test  ui/components/build/outputs/apk/androidTest/debug/components-debug-androidTest.apk --device model=Pixel2,version=28,locale=pl,orientation=portrait
 
 
