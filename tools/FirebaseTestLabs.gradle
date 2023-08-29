@@ -1,0 +1,29 @@
+apply plugin: 'firebase.test.lab'
+
+def ENV = System.getenv()
+def FIREBASE_AUTH = ENV['FIREBASE_AUTH']
+def PROJECT_ID = ENV["PROJECT_ID"]
+
+//
+firebaseTestLab {
+    print(FIREBASE_AUTH)
+    keyFile = file(FIREBASE_AUTH)
+    googleProjectId = PROJECT_ID
+    devices {
+        nexusEmulator {
+            deviceIds = ["hammerhead"]
+            androidApiLevels = [23]
+        }
+    }
+}
+
+//firebaseTestLab {
+//    keyFile = file("test-lab-key.json")
+//    googleProjectId = "your-project-app-id"
+//    devices {
+//        nexusEmulator {
+//            deviceIds = ["hammerhead"]
+//            androidApiLevels = [23]
+//        }
+//    }
+//}

@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 }
-
+apply("${project.rootDir}/tools/FirebaseTestLabs.gradle")
 apply("${project.rootDir}/tools/jacoco-project.gradle")
 apply("${project.rootDir}/tools/jacoco.modules.gradle")
 
@@ -38,6 +38,7 @@ android {
     }
 }
 
+
 dependencies {
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
@@ -53,3 +54,10 @@ dependencies {
 
     implementation(project(":feature:character:presentation"))
 }
+
+//gcloud firebase test android run \
+//--app app/build/outputs/apk/debug/app-debug.apk \
+//--test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
+//--test feature/character/presentation/build/outputs/apk/androidTest/debug/presentation-debug-androidTest.apk \
+//--results-bucket cloud-test-heroes-ef5c5 \
+//--project=heroes-ef5c5
