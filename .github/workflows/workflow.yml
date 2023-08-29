@@ -37,7 +37,7 @@ jobs:
 
       - name: Test
         run: |
-          gcloud firebase test android run --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk --test feature/character/presentation/build/outputs/apk/androidTest/debug/presentation-debug-androidTest.apk --results-bucket cloud-test-heroes-ef5c5 --project=heroes-ef5c5
+          gcloud firebase test android run --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk --results-bucket cloud-test-heroes-ef5c5 --project=heroes-ef5c5
 
 #      - name: Test
 #        run: |
