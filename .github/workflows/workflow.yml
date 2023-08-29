@@ -28,7 +28,7 @@ jobs:
 #        run: ./gradlew allDebugCoverage
 
       - name: Build debug
-        run: ./gradlew --no-daemon assembleDebugAndroidTest
+        run: ./gradlew --no-daemon assembleDebug assembleDebugAndroidTest
 
       - name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v1'
