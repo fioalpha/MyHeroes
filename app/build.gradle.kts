@@ -2,7 +2,6 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 }
-apply("${project.rootDir}/tools/FirebaseTestLabs.gradle")
 apply("${project.rootDir}/tools/jacoco-project.gradle")
 apply("${project.rootDir}/tools/jacoco.modules.gradle")
 
