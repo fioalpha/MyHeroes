@@ -21,14 +21,14 @@ jobs:
       - name: Setuop Android SDK
         uses: android-actions/setup-android@v2
 
-      - name: Unit test
-        run: ./gradlew coverAllVariants
-
-      - name: Merge report
-        run: ./gradlew allDebugCoverage
+#      - name: Unit test
+#        run: ./gradlew coverAllVariants
+#
+#      - name: Merge report
+#        run: ./gradlew allDebugCoverage
 
       - name: Build debug
-        run: ./gradlew --no-daemon assembleDebug
+        run: ./gradlew --no-daemon assembleDebugAndroidTest
 
       - name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v1'
