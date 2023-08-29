@@ -30,15 +30,18 @@ jobs:
       - name: Build debug
         run: ./gradlew --no-daemon assembleDebug assembleDebugAndroidTest
 
-      - name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v1'
+      - name: Running Interface Test
         with:
-          credentials_json: '${{ secrets.FIREBASE_AUTH }}'
+          arg-spec: '.github/workflows/firebaseTestLab.yaml'
 
-      - name: Test
-        run: |
-          gcloud firebase test android run --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk --results-bucket cloud-test-heroes-ef5c5 --project=heroes-ef5c5
-
+#      - name: 'Authenticate to Google Cloud'
+#        uses: 'google-github-actions/auth@v1'
+#        with:
+#          credentials_json: '${{ secrets.FIREBASE_AUTH }}'
+#
+#      - name: Test
+#        run: |
+#          gcloud firebase test android run --type instrumentation --use-orchestrator --no-performance-metrics --no-record-video --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk  --results-bucket cloud-test-heroes-ef5c5 --project=heroes-ef5c5
 #      - name: Test
 #        run: |
 #          pwd && ls
@@ -64,7 +67,6 @@ jobs:
 #          service_account_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
 #
 #      - name: Set current project
-#        run: gcloud config set project heroes-ef5c5
+#        run: gcloud config set project ${{ secrets.GCLOUD_PROJECT_ID }}
 
-#      - name: Run Instrumentation Tests in Firebase Test Lab
-#        run: gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test app-debug-androidTest/app-debug-androidTest.apk --device model=Pixel2,version=28,locale=pl,orientation=portrait
+
