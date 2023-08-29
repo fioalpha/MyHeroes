@@ -32,6 +32,8 @@ jobs:
       - name: Test
         run: |
           pwd && ls
+          cd app/build/output
+          ls -R
 #
 #      - name: Run Android tests on Firebase Test Lab
 #        uses: asadmansr/Firebase-Test-Lab-Action@v1.0
