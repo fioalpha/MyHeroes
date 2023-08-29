@@ -29,11 +29,11 @@ jobs:
 
       - name: Build debug
         run: ./gradlew --no-daemon assembleDebug
-#      - name: Test
-#        run: |
-#          pwd && ls
-#          cd app/build
-#          ls -R
+      - name: Test
+        run: |
+          pwd && ls
+          cd app/build/outputs/apk/debug
+          ls -R
 #
       - name: Run Android tests on Firebase Test Lab
         uses: asadmansr/Firebase-Test-Lab-Action@v1.0
