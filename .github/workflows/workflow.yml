@@ -32,7 +32,7 @@ jobs:
       - name: Test
         run: |
           pwd && ls
-          cd app/build/output
+          cd app/build
           ls -R
 #
 #      - name: Run Android tests on Firebase Test Lab
