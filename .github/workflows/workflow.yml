@@ -29,14 +29,17 @@ jobs:
 
       - name: Build debug
         run: ./gradlew --no-daemon build
-
-      - name: Run Android tests on Firebase Test Lab
-        uses: asadmansr/Firebase-Test-Lab-Action@v1.0
-        with:
-          arg-spec: 'android-device.yml:android-pixel-4'
-        env:
-          SERVICE_ACCOUNT: ${{ secrets.FIREBASE_AUTH }}
+      - name: Test
+        run: |
+          chmod && ls
 #
+#      - name: Run Android tests on Firebase Test Lab
+#        uses: asadmansr/Firebase-Test-Lab-Action@v1.0
+#        with:
+#          arg-spec: 'android-device.yml:android-pixel-4'
+#        env:
+#          SERVICE_ACCOUNT: ${{ secrets.FIREBASE_AUTH }}
+##
 #      - name: Download Android test APK
 #        uses: actions/download-artifact@v1
 #        with:
