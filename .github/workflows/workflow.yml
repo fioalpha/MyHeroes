@@ -31,7 +31,7 @@ jobs:
         run: ./gradlew --no-daemon build
       - name: Test
         run: |
-          chmod && ls
+          pwd && ls
 #
 #      - name: Run Android tests on Firebase Test Lab
 #        uses: asadmansr/Firebase-Test-Lab-Action@v1.0
