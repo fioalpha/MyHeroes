@@ -30,6 +30,9 @@ jobs:
       - name: Build debug
         run: ./gradlew --no-daemon assembleDebug assembleDebugAndroidTest
 
+      - name: Build debug
+        run: ./gradlew --no-daemon assembleDebugAndroidTest
+
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
