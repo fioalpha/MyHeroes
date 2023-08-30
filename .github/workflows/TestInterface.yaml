@@ -1,0 +1,40 @@
+name: Test Interface Firebase TestLabs
+run-name: Testing to ${{ inputs.deploy_target }}
+on:
+  pull_request:
+    types:
+      - opened
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup SDK 1.17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'adopt'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
+
+      - name: Build debug
+        run: ./gradlew --no-daemon assembleDebug assembleDebugAndroidTest
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: '${{ secrets.FIREBASE_AUTH }}'
+
+      - name: Run Instrumentation Tests in Firebase Test Lab
+        run: gcloud firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk --results-bucket=${{ secrets.CLOUD_TEST_PROJECT_ID }} --project=${{ secrets.GCLOUD_PROJECT_ID }}  --device model=Pixel2,version=28,locale=pl,orientation=portrait
+
+      - name: Run Instrumentation Tests in Firebase Test Lab Presentation Characters Module
+        run: gcloud firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test feature/character/presentation/build/outputs/apk/androidTest/debug/presentation-debug-androidTest.apk --results-bucket=${{ secrets.CLOUD_TEST_PROJECT_ID }} --project=${{ secrets.GCLOUD_PROJECT_ID }}  --device model=Pixel2,version=28,locale=pl,orientation=portrait
+
+      - name: Run Instrumentation Tests in Firebase Test Lab Ui Module
+        run: gcloud firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test  ui/components/build/outputs/apk/androidTest/debug/components-debug-androidTest.apk --results-bucket=${{ secrets.CLOUD_TEST_PROJECT_ID }} --project=${{ secrets.GCLOUD_PROJECT_ID }} --device model=Pixel2,version=28,locale=pl,orientation=portrait
