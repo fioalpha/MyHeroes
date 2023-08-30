@@ -2,6 +2,8 @@ name: Test Interface Firebase TestLabs
 run-name: Testing to ${{ inputs.deploy_target }}
 on:
   pull_request:
+    types:
+      - closed
     branches: [ "main" ]
   workflow_dispatch:
 
