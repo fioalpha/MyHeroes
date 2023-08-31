@@ -28,12 +28,29 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+
+    flavorDimensions += "version"
+
+    productFlavors {
+        create("product") {
+            dimension = "version"
+        }
+        create("e2e") {
+            dimension = "version"
+            applicationIdSuffix = ".e2e"
+            versionNameSuffix = ".e2e"
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+    buildFeatures {
+        buildConfig = true
     }
 }
 
@@ -46,10 +63,12 @@ dependencies {
 
     implementation(libs.koin.android)
     implementation(libs.koin.core)
+    androidTestImplementation(libs.androidx.ui.test.junit4.android)
 
     testImplementation(libs.junit)
-    androidTestImplementation(libs.test.ext.junit)
-    androidTestImplementation(libs.expresso.core)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.compose.ui.test.junit)
+    androidTestImplementation(libs.espresso.core)
 
     implementation(project(":feature:character:presentation"))
 }

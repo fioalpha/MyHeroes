@@ -16,6 +16,7 @@ android {
     }
 
     buildTypes {
+        debug {}
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -24,6 +25,24 @@ android {
             )
         }
     }
+
+    flavorDimensions += "version"
+
+    productFlavors {
+        create("product") {
+            dimension = "version"
+            buildConfigField("String", "URL_BASE", "\"http://gateway.marvel.com/v1/public/\"")
+        }
+        create("e2e") {
+            dimension = "version"
+            buildConfigField("String", "URL_BASE", "\"http://192.168.68.135:3000/\"")
+        }
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17

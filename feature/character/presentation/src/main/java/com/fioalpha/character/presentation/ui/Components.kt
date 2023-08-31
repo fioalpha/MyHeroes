@@ -20,7 +20,7 @@ fun CharactersPage(
     characterViewModel: CharacterViewModel = viewModel()
 ) {
     val state = characterViewModel.bind().collectAsState()
-    CharactersPageState(state as CharacterViewState) {
+    CharactersPageState(state.value) {
         characterViewModel.handle(it)
     }
 }
