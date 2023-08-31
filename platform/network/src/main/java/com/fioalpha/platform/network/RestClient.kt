@@ -27,10 +27,6 @@ object HeroesServiceBuilder {
         return OkHttpClient.Builder()
             .addInterceptor(interceptor)
             .addInterceptor(AuthenticationUrl())
-//            .callTimeout(20, TimeUnit.MICROSECONDS)
-//            .connectTimeout(20, TimeUnit.MICROSECONDS)
-//            .readTimeout(20, TimeUnit.MICROSECONDS)
-//            .writeTimeout(20, TimeUnit.MICROSECONDS)
             .retryOnConnectionFailure(false)
             .build()
     }

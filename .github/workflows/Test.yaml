@@ -1,7 +1,5 @@
 name: CI
 on:
-#  push:
-#    branches: [ "main", "develop/**"]
   workflow_dispatch:
 
 jobs:
@@ -15,6 +13,12 @@ jobs:
         with:
           java-version: 17
           distribution: 'adopt'
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      - run: npm install -g @mockoon/cli
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2

@@ -57,6 +57,7 @@ compose-coil = "io.coil-kt:coil-compose:2.4.0"
 # Koin
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref= "koin" }
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
+androidx-ui-test-junit4-android = { group = "androidx.compose.ui", name = "ui-test-junit4-android", version = "1.5.0" }
 
 [versions]
 org-jacoco-core = "0.8.6"

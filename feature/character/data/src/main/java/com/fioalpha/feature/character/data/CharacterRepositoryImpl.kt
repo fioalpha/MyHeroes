@@ -30,6 +30,6 @@ class CharacterRepositoryImpl(
 
 object CharacterRepositoryFactory {
     fun create(): CharacterRepository {
-        return CharacterRepositoryImpl(HeroesServiceBuilder.build("http://gateway.marvel.com/v1/public/"))
+        return CharacterRepositoryImpl(HeroesServiceBuilder.build(BuildConfig.URL_BASE))
     }
 }
