@@ -4,8 +4,8 @@ plugins {
     alias(libs.plugins.org.jetbrains.kotlin.android)
 }
 
-apply("${project.rootDir}/tools/jacoco-project.gradle")
-apply("${project.rootDir}/tools/jacoco.modules.gradle")
+//apply("${project.rootDir}/tools/jacoco-project.gradle")
+//apply("${project.rootDir}/tools/jacoco.modules.gradle")
 
 android {
     namespace = "com.fioalpha.character.presentation"
@@ -16,6 +16,12 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+    }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
     }
 
     buildTypes {
@@ -89,4 +95,8 @@ dependencies {
     testImplementation(libs.coroutine.test)
     testImplementation(libs.google.truth)
     testImplementation(project(":platform:testhelper"))
+
+    testImplementation(libs.robolectric )
+    testImplementation(libs.compose.ui.test.junit)
+    debugImplementation(libs.compose.ui.test.manisfest)
 }

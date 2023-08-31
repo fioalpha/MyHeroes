@@ -2,8 +2,6 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 }
-apply("${project.rootDir}/tools/jacoco-project.gradle")
-apply("${project.rootDir}/tools/jacoco.modules.gradle")
 
 android {
     namespace = "com.fioalpha.myheroes"
@@ -17,6 +15,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
     }
 
     buildTypes {
@@ -54,7 +58,6 @@ android {
     }
 }
 
-
 dependencies {
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
@@ -65,10 +68,14 @@ dependencies {
     implementation(libs.koin.core)
     androidTestImplementation(libs.androidx.ui.test.junit4.android)
 
-    testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.compose.ui.test.junit)
     androidTestImplementation(libs.espresso.core)
 
     implementation(project(":feature:character:presentation"))
+
+    testImplementation(libs.junit)
+    testImplementation(libs.robolectric )
+    testImplementation(libs.compose.ui.test.junit)
+    debugImplementation(libs.compose.ui.test.manisfest)
 }

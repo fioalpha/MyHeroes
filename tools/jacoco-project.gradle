@@ -1,84 +1,69 @@
-apply plugin: 'jacoco'
+//apply plugin: 'jacoco'
+//
+//jacoco {
+//    toolVersion '0.8.10'
+//}
 
-jacoco {
-    toolVersion '0.8.10'
+//tasks.withType(Test) {
+//    jacoco.includeNoLocationClasses = true
+//    jacoco.excludes = ['jdk.internal.*']
+//}
+
+
+//afterEvaluate {
+//    project -> android.buildTypes.collect { type ->
+//        type.name
+//    }
+//}
+private static isAndroidModule(Project project) {
+    boolean isAndroidLibrary = project.plugins.hasPlugin('com.android.library')
+    boolean isAndroidApp = project.plugins.hasPlugin('com.android.application')
+    return isAndroidLibrary || isAndroidApp
 }
 
-tasks.withType(Test) {
-    jacoco.includeNoLocationClasses = true
-    jacoco.excludes = ['jdk.internal.*']
+afterEvaluate { project ->
+    if (isAndroidModule(project)) setupAndroidReporting()
+    else setupKotlinReporting()
 }
 
-project.afterEvaluate {
-    def variants = ["debug"]
+def setupAndroidReporting() {
+    tasks.withType(Test) {
+        jacoco.includeNoLocationClasses true
+    }
 
-    tasks.create(name: "allDebugCoverage", type: JacocoReport) {
+    def buildTypes = android.buildTypes.collect{
+        type -> type.name
+    }
+    def productFlavors = android.productFlavors.collect {
+        flavor -> flavor.name
+    }
+    println(buildTypes)
+    println(productFlavors)
 
-        group = "Reporting"
-        description = "Generate overall Jacoco coverage report for the debug build."
-
-        reports {
-            html.required.set(true)
-            xml.required.set(true)
-        }
-
-        def excludes = [
-                '**/R.class',
-                '**/R$*.class',
-                '**/BuildConfig.*',
-                '**/Manifest*.*',
-                '**/*Test*.*',
-                'android/**/*.*',
-                'androidx/**/*.*',
-                '**/*$ViewInjector*.*',
-                '**/*Dagger*.*',
-                '**/*MembersInjector*.*',
-                '**/*_Factory.*',
-                '**/*_Provide*Factory*.*',
-                '**/*_ViewBinding*.*',
-                '**/AutoValue_*.*',
-                '**/R2.class',
-                '**/R2$*.class',
-                '**/*Directions$*',
-                '**/*Directions.*',
-                '**/*Binding.*'
-        ]
-
-        def jClasses = subprojects.collect { proj ->
-            variants.collect { variant ->
-                "${proj.buildDir}/intermediates/javac/$variant/classes"
+    if (!productFlavors) productFlavors.add('')
+    productFlavors.each { productFlavorName ->
+        buildTypes.each { buildTypeName ->
+            def sourceName, sourcePath, testTaskName
+            sourceName = sourcePath = "${buildTypeName}"
+            if(productFlavorName) {
+                sourceName = "${productFlavorName}${buildTypeName.capitalize()}"
+                sourcePath = "${productFlavorName}/${buildTypeName}"
             }
-        }.flatten()
-        def kClasses = subprojects.collect { proj ->
-            variants.collect { variant ->
-                "${proj.buildDir}/tmp/kotlin-classes/$variant"
+            println(sourceName)
+            println(sourcePath)
+            testTaskName = "test${sourceName.capitalize()}UnitTest"
+            task "${testTaskName}Coverage"(type: JacocoReport, dependsOn: "$testTaskName") {
+                group = "Reporting"
+                description = "Generate Jacoco coverage on teh ${sourceName.capitalize()} build."
+                println("${project.buildDir}/intermediate/javac/${sourceName}/classes")
+                def fileFilter = []
+
+                def javaTree = fileTree(dir: "${project.buildDir}/intermediate/javac/${sourceName}/classes", excludes: fileFilter)
+//                def eewe
+//                d
             }
-        }.flatten()
-
-        def javaClasses = jClasses.collect { path ->
-            fileTree(dir: path, excludes: excludes)
         }
-        def kotlinClasses = kClasses.collect { path ->
-            fileTree(dir: path, excludes: excludes)
-        }
-
-        classDirectories.from = files([javaClasses, kotlinClasses])
-        def sources = subprojects.collect { proj ->
-            variants.collect { variant ->
-                ["${proj.projectDir}/src/main/java", "${proj.projectDir}/src/main/kotlin",
-                 "${proj.projectDir}/src/$variant/java", "${proj.projectDir}/src/$variant/kotlin"]
-            }.flatten()
-        }.flatten()
-        sourceDirectories.from = files(sources)
-
-        def executions = subprojects.collect { proj ->
-            variants.collect { variant ->
-                def path = "${proj.buildDir}/jacoco/test${variant.capitalize()}UnitTest.exec"
-                if ((new File(path)).exists()) path else null
-            }
-        }.flatten()
-        executions.removeAll([null])
-
-        executionData.from = files(executions)
     }
 }
+
+def setupKotlinReporting() {}

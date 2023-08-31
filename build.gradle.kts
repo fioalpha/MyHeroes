@@ -11,7 +11,7 @@ buildscript {
     }
     dependencies {
         classpath("firebase.test.lab:plugin:2.6.2")
+        classpath("org.jacoco:org.jacoco.core:0.8.10")
     }
 }
 
-apply("${project.rootDir}/tools/jacoco-project.gradle")

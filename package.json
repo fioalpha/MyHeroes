@@ -1,0 +1,16 @@
+{
+  "name": "myheroes",
+  "version": "1.0.0",
+  "description": "This project is case study of the architecture Android project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "mockoon-cli start --data ./mock-server.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@mockoon/cli": "^4.1.0"
+  }
+}
