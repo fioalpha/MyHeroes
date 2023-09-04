@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fioalpha.character.presentation.CharacterInteraction
@@ -20,7 +21,7 @@ fun CharactersPage(
     characterViewModel: CharacterViewModel = viewModel()
 ) {
     val state = characterViewModel.bind().collectAsState()
-    CharactersPageState(state as CharacterViewState) {
+    CharactersPageState(state.value) {
         characterViewModel.handle(it)
     }
 }
