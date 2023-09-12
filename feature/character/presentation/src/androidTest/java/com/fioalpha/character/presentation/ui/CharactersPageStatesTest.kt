@@ -41,7 +41,7 @@ class CharactersPageStatesTest {
     fun pageCharacterWithStateInitStateTransaction() {
         composeTestRule.setContent {
             CharactersPageState(CharacterViewState.Init) {
-                assertTrue(it is CharacterInteraction.LoadingData)
+                assertTrue(it is CharacterInteraction.MoreLoadingData)
             }
         }
     }

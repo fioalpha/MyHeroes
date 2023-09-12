@@ -1,5 +1,6 @@
 package com.fioalpha.character.presentation
 
 sealed interface CharacterInteraction {
-    data class LoadingData(val offset: Int): CharacterInteraction
+    object Init: CharacterInteraction
+    data class MoreLoadingData(val offset: Int): CharacterInteraction
 }

@@ -1,53 +1,110 @@
 package com.fioalpha.ui.components.heroes
 
-import android.widget.ImageView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Colors
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ProgressIndicatorDefaults
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.fioalpha.ui.components.R
 import com.fioalpha.ui.theme.HeroesTheme
-import okhttp3.internal.threadName
+import kotlinx.coroutines.flow.distinctUntilChanged
+
+
+@Composable
+fun ItemCharacterContainer(
+    characters: List<CharacterView> = emptyList(),
+    isLoading: Boolean = false,
+    loadMore: (Int) -> Unit = {}
+) {
+    Box(
+        modifier = Modifier
+            .background(Color.White)
+            .fillMaxWidth()
+            .fillMaxHeight(),
+    ) {
+        ItemsCharacters(characters, loadMore = loadMore)
+        if (!isLoading) return
+        Box(
+            contentAlignment = Alignment.BottomCenter,
+            modifier = Modifier
+                .background(Color.Transparent)
+                .fillMaxWidth()
+                .fillMaxHeight()
+        ) {
+            Box(
+                contentAlignment = Alignment.BottomCenter,
+                modifier = Modifier
+                    .background(Color(0XCCCCCCCC))
+                    .fillMaxWidth()
+                    .height(48.dp)
+                    .padding(8.dp)
+            ) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(32.dp)
+                )
+            }
+
+        }
+    }
+
+}
+
+@Composable
+@Preview
+fun ItemCharacterContainerPreview() {
+    ItemCharacterContainer(
+       listOf(
+            CharacterView("sdfsdf", "123434"),
+            CharacterView("sdfsdf", "123434"),
+            CharacterView("sdfsdf", "123434"),
+            CharacterView("sdfsdf", "123434"),
+            CharacterView("sdfsdf", "123434"),
+            CharacterView("sdfsdf", "123434"),
+            CharacterView("sdfsdf", "123434"),
+            CharacterView("sdfsdf", "123434"),
+            CharacterView("sdfsdf", "123434"),
+            CharacterView("sdfsdf", "123434"),
+            CharacterView("sdfsdf", "123434"),
+            CharacterView("sdfsdf", "123434"),
+            CharacterView("sdfsdf", "123434"),
+            CharacterView("sdfsdf", "123434"),
+    ) ){}
+}
 
 @Composable
 fun ItemCharacter(
@@ -99,10 +156,14 @@ fun ItemCharacterPreview() {
 
 @Composable
 fun ItemsCharacters(
-    characters: List<CharacterView> = emptyList()
+    characters: List<CharacterView> = emptyList(),
+    loadMore: (Int) -> Unit = {}
 ) {
+    val lazyListState = rememberLazyGridState()
+
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
+        state = lazyListState,
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -112,7 +173,9 @@ fun ItemsCharacters(
             Row(modifier = Modifier.height(IntrinsicSize.Min)) {
                 ItemCharacter(path = it.pathImage, it.name)
             }
-
+            InfiniteListHandler(lazyListState = lazyListState) {
+                loadMore(characters.size)
+            }
         }
     }
 }
@@ -133,7 +196,8 @@ fun ItemsCharactersPreview() {
 
 @Composable
 fun Loading() {
-    Box(modifier = Modifier.fillMaxWidth()
+    Box(modifier = Modifier
+        .fillMaxWidth()
         .semantics {
             contentDescription = "Loading"
         }
@@ -190,5 +254,30 @@ fun PageContainerPreview() {
 data class CharacterView(
     val pathImage: String,
     val name: String?
-
 )
+
+@Composable
+fun InfiniteListHandler(
+    lazyListState: LazyGridState,
+    buffer: Int = 2,
+    onLoadMore: () -> Unit
+) {
+    val loadMore = remember {
+        derivedStateOf {
+            val layoutInfo = lazyListState.layoutInfo
+            val totalItems = layoutInfo.totalItemsCount
+            val lastVisibleItemIndex = (layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0) + 1
+            val s = lastVisibleItemIndex > (totalItems - buffer)
+           s
+        }
+    }
+
+    LaunchedEffect(loadMore) {
+        snapshotFlow { loadMore.value }
+            .distinctUntilChanged()
+            .collect {
+                if(it)
+                    onLoadMore()
+            }
+    }
+}
