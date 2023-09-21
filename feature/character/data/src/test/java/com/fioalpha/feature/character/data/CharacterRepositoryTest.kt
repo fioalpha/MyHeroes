@@ -30,7 +30,7 @@ class CharacterRepositoryTest {
     fun `should return characters`() = runTest {
         coEvery {
             service.charactersHeroes()
-        } returns loadFile("result_wrapper.json").fromObject()
+        } returns loadFile("result_wrapper.json")!!.fromObject()
 
         repository.fetchCharacters()
             .run {
@@ -42,7 +42,7 @@ class CharacterRepositoryTest {
     fun `should exception with code 400`() = runTest {
         coEvery {
             service.charactersHeroes()
-        } returns loadFile("result_wrapper_400_code.json").fromObject()
+        } returns loadFile("result_wrapper_400_code.json")!!.fromObject()
 
         repository.fetchCharacters()
     }
