@@ -32,7 +32,7 @@ fun PageContainer(
 @Preview()
 @Composable
 fun PageContainerPreview() {
-    PageContainer("wefwerfwer",) {
+    PageContainer("Page Test",) {
         ItemsCharacters(
             listOf(
                 CharacterView("sdfsdf", "123434"),
