@@ -6,7 +6,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import com.fioalpha.character.presentation.CharacterInteraction
 import com.fioalpha.character.presentation.CharacterViewState
-import com.fioalpha.ui.components.heroes.CharacterView
+import com.fioalpha.ui.components.heroes.model.CharacterView
 import junit.framework.TestCase.assertTrue
 import org.junit.Rule
 import org.junit.Test

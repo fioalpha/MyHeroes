@@ -8,7 +8,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fioalpha.character.presentation.CharacterInteraction
 import com.fioalpha.character.presentation.CharacterViewModel
 import com.fioalpha.character.presentation.CharacterViewState
-import com.fioalpha.ui.components.heroes.CharacterView
+import com.fioalpha.ui.components.heroes.model.CharacterView
 import com.fioalpha.ui.components.heroes.ItemCharacterContainer
 import com.fioalpha.ui.components.heroes.Loading
 import com.fioalpha.ui.components.heroes.PageContainer

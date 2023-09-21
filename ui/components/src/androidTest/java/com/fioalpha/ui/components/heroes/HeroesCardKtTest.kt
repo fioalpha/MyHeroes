@@ -3,7 +3,7 @@ package com.fioalpha.ui.components.heroes
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import org.junit.Assert.*
+import com.fioalpha.ui.components.heroes.model.CharacterView
 import org.junit.Rule
 import org.junit.Test
 

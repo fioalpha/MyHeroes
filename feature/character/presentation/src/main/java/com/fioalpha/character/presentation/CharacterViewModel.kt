@@ -3,10 +3,9 @@ package com.fioalpha.character.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fioalpha.feature.character.data.CharacterRepository
-import com.fioalpha.ui.components.heroes.CharacterView
+import com.fioalpha.ui.components.heroes.model.CharacterView
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.consumeAsFlow

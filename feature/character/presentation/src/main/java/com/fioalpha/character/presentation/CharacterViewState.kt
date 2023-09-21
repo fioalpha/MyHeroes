@@ -1,6 +1,6 @@
 package com.fioalpha.character.presentation
 
-import com.fioalpha.ui.components.heroes.CharacterView
+import com.fioalpha.ui.components.heroes.model.CharacterView
 
 sealed interface CharacterViewState {
     data class Error(val message: String): CharacterViewState
