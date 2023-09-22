@@ -36,7 +36,8 @@ compose-ui = { group = "androidx.compose.ui", name = "ui" }
 compose-ui-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-activity = { group = "androidx.activity", name = "activity-compose", version = "1.7.2"}
-compose-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version = "2.6.1"}
+compose-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version = "2.6.2"}
+compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version = "2.7.1" }
 
 # Coroutine Tests
 compose-ui-test-junit = { group = "androidx.compose.ui", name = "ui-test-junit4" }
@@ -60,19 +61,20 @@ koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin"
 
 [versions]
 org-jacoco-core = "0.8.6"
-org-jetbrains-kotlin-jvm = "1.8.10"
-agp = "8.1.0"
-org-jetbrains-kotlin-android = "1.8.10"
-core-ktx = "1.10.1"
+org-jetbrains-kotlin-jvm = "1.8.22"
+agp = "8.1.1"
+org-jetbrains-kotlin-android = "1.8.22"
+core-ktx = "1.12.0"
 junit = "4.13.2"
 androidx-test-ext-junit = "1.1.5"
 espresso-core = "3.5.1"
 appcompat = "1.6.1"
 material = "1.9.0"
 android-application = "8.1.0"
-android-compile = "33"
+android-compile = "34"
 android-min-sdk = "24"
-compose-compile = "1.4.4"
+android-target = "34"
+compose-compile = "1.4.8"
 koin = "3.4.3"
 
 [plugins]

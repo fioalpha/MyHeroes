@@ -6,10 +6,10 @@ plugins {
 
 android {
     namespace = "com.fioalpha.feature.character.data"
-    compileSdk = 33
+    compileSdk = libs.versions.android.compile.get().toInt()
 
     defaultConfig {
-        minSdk = 24
+        minSdk = libs.versions.android.min.sdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")

@@ -18,7 +18,7 @@ class CharactersPageStatesTest {
     @Test
     fun pageCharacterWithStateLoading() {
         composeTestRule.setContent {
-            CharactersPageState(CharacterViewState.Loading) {}
+            CharactersScreenState(CharacterViewState.Loading) {}
         }
         composeTestRule.onNodeWithContentDescription("Loading").assertIsDisplayed()
     }
@@ -26,7 +26,7 @@ class CharactersPageStatesTest {
     @Test
     fun pageCharacterWithStateDataWithTwoItems() {
         composeTestRule.setContent {
-            CharactersPageState(CharacterViewState.Data(
+            CharactersScreenState(CharacterViewState.Data(
                 listOf(
                     CharacterView("Any Path", "First"),
                     CharacterView("Any Path", "Second"),
@@ -40,7 +40,7 @@ class CharactersPageStatesTest {
     @Test
     fun pageCharacterWithStateInitStateTransaction() {
         composeTestRule.setContent {
-            CharactersPageState(CharacterViewState.Init) {
+            CharactersScreenState(CharacterViewState.Init) {
                 assertTrue(it is CharacterInteraction.MoreLoadingData)
             }
         }

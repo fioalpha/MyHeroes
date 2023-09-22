@@ -14,17 +14,17 @@ import com.fioalpha.ui.components.heroes.Loading
 import com.fioalpha.ui.components.heroes.PageContainer
 
 @Composable
-fun CharactersPage(
+fun CharactersScreen(
     characterViewModel: CharacterViewModel = viewModel()
 ) {
     val state = characterViewModel.bind().collectAsState()
-    CharactersPageState(state.value) {
+    CharactersScreenState(state.value) {
         characterViewModel.handle(it)
     }
 }
 
 @Composable
-fun CharactersPageState(
+fun CharactersScreenState(
     state: CharacterViewState,
     action: (CharacterInteraction) -> Unit
 ) {
@@ -57,11 +57,11 @@ fun characters(data: CharacterViewState): List<CharacterView>{
 @Preview()
 @Composable
 fun CharactersPagePreview() {
-    CharactersPage()
+    CharactersScreen()
 }
 
 @Preview()
 @Composable
 fun CharactersPageDataPreview() {
-    CharactersPage()
+    CharactersScreen()
 }
